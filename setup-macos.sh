@@ -173,65 +173,13 @@ import = [
 A
 fi
 
-# starship
-[[ -f ~/.config/starship.toml ]] || {
-  echo 'eval "$(starship init bash)"' >>~/.bashrc
-  echo 'eval "$(starship init zsh)"' >>~/.zshrc
-  cat <<'A' >>~/.config/starship.toml
-"$schema" = 'https://starship.rs/config-schema.json'
-
-add_newline = false
-
-format = '''\[\[\[${username}@${hostname}:\(${time}\):${directory}:${memory_usage}\]\]\] $package
-->>> '''
-
-right_format = '$git_status$git_branch$git_commit$git_state'
-
-[character]
-success_symbol = "[>](bold green)"
-error_symbol = "[✗](bold red)"
-
-[username]
-disabled = false
-style_user = "red bold"
-style_root = "red bold"
-format = '[$user]($style)'
-show_always = true
-
-[hostname]
-disabled = false
-ssh_only = false
-style = "bold blue"
-format = '[$hostname]($style)'
-
-[time]
-disabled = false
-format = '[$time]($style)'
-
-[directory]
-# truncation_length = 10
-truncation_symbol = '…/'
-format = '[$path]($style)[$read_only]($read_only_style)'
-# truncate_to_repo = false
-
-[memory_usage]
-disabled = false
-threshold = -1
-style = "bold dimmed green"
-format = "[$ram_pct]($style)"
-
-[package]
-disabled = false
-format = '[$symbol$version]($style)'
-A
-}
-
 # sheldon
 sheldon init --shell zsh <<<y
 sheldon add --github zdharma/fast-syntax-highlighting fast-syntax-highlighting
 sheldon add --github zdharma-continuum/history-search-multi-word history-search-multi-word
 sheldon add --github zsh-users/zsh-autosuggestions zsh-autosuggestions
 sheldon add --github zsh-users/zsh-completions zsh-completions
+sheldon add --use async.zsh pure.zsh --github sindresorhus/pure pure
 
 cat <<'A' >>~/.zshrc
 eval "$(sheldon source)"
