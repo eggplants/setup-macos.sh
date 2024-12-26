@@ -12,7 +12,8 @@ cp /path/to/.my.gpg.sec.key ~/.sec.key
 ./setup-macos.sh
 ```
 
-![image](https://github.com/user-attachments/assets/456b5d11-9784-41d7-8fbd-78161d9198d9)
+
+![Screenshot 2024-12-26 at 19 54 47](https://github.com/user-attachments/assets/a9fb5751-288b-491d-b289-299702346f9a)
 
 ## Family
 
