@@ -3,6 +3,11 @@
 set -euo pipefail
 
 # --setup writes statusLine to ~/.claude/settings.json and installs the
-# /statusbar commands and skill; skip once statusLine already uses it.
-jq -e '.statusLine.command // "" | test("claude-statusbar|/cs$")' ~/.claude/settings.json &>/dev/null ||
-  claude-statusbar --setup
+# /statusbar commands and skill; skip once statusLine runs an existing
+# claude-statusbar (or its `cs` alias).
+cmd="$(jq -r '.statusLine.command // ""' ~/.claude/settings.json 2>/dev/null || :)"
+cmd="${cmd%% *}"
+if [[ "$cmd" =~ (claude-statusbar|/cs)$ ]] && command -v "$cmd" &>/dev/null; then
+  exit 0
+fi
+claude-statusbar --setup
