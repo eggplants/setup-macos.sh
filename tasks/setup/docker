@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+#MISE description="Point the docker CLI at Homebrew's CLI plugins and the colima context"
+set -euo pipefail
+
+plugins_dir=/opt/homebrew/lib/docker/cli-plugins
+config=~/.docker/config.json
+mkdir -p ~/.docker/cli-plugins
+[[ -s "$config" ]] || echo '{}' > "$config"
+
+if ! jq -e --arg d "$plugins_dir" '.cliPluginsExtraDirs // [] | index($d)' "$config" &>/dev/null; then
+  tmp="$(mktemp)"
+  jq --arg d "$plugins_dir" '.cliPluginsExtraDirs = ((.cliPluginsExtraDirs // []) + [$d] | unique)' "$config" > "$tmp"
+  mv "$tmp" "$config"
+fi
+
+# ~/.docker/cli-plugins wins over cliPluginsExtraDirs; drop OrbStack's links.
+for link in ~/.docker/cli-plugins/*; do
+  [[ -L "$link" && "$(readlink "$link")" == /Applications/OrbStack.app/* ]] && rm "$link"
+done
+
+# colima creates the context on start; the colima service may still be booting.
+for _ in {1..60}; do
+  docker context inspect colima &>/dev/null && break
+  sleep 2
+done
+if [[ "$(docker context show)" != colima ]]; then
+  docker context use colima
+fi

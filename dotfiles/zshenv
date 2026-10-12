@@ -1,0 +1,14 @@
+# ~/.zshenv — managed by mise dotfiles (~/.config/mise/dotfiles/zshenv)
+
+# /etc/zprofile (path_helper) reorders PATH for login shells, so ~/.zshrc
+# prepends these again.
+typeset -U path PATH
+path=("$HOME/.local/bin" /opt/homebrew/bin /opt/homebrew/sbin $path)
+
+export EDITOR=nano
+
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
+
+function shfmt() {
+  command shfmt -i 4 -l -w "$@"
+}

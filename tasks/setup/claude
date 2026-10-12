@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#MISE description="Point Claude Code's statusLine at claude-statusbar"
+set -euo pipefail
+
+# --setup writes statusLine to ~/.claude/settings.json and installs the
+# /statusbar commands and skill; skip once statusLine already uses it.
+jq -e '.statusLine.command // "" | test("claude-statusbar|/cs$")' ~/.claude/settings.json &>/dev/null ||
+  claude-statusbar --setup

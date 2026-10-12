@@ -1,0 +1,12 @@
+include "~/.local/share/nano-highlight/*.nanorc"
+
+set autoindent
+set constantshow
+set linenumbers
+set tabsize 4
+set softwrap
+
+set titlecolor white,red
+set numbercolor white,blue
+set selectedcolor white,green
+set statuscolor white,green

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#MISE description="Install VS Code extensions"
+set -euo pipefail
+
+command -v code &>/dev/null || exit 0
+
+installed="$(code --list-extensions)"
+for ext in anthropic.claude-code lokalise.i18n-ally ms-vscode-remote.remote-containers redhat.vscode-yaml; do
+  grep -qix "$ext" <<<"$installed" || code --install-extension "$ext"
+done

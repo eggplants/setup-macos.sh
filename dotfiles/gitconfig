@@ -1,0 +1,41 @@
+# ~/.gitconfig — managed by mise dotfiles (~/.config/mise/dotfiles/gitconfig)
+# user.email and user.signingkey come from the GPG keyring and are written to
+# ~/.gitconfig.local by the setup:git task.
+
+[user]
+	name = eggplants
+[commit]
+	gpgSign = true
+[tag]
+	gpgSign = true
+[core]
+	editor = nano
+[gpg]
+	program = /opt/homebrew/bin/gpg
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
+[help]
+	autocorrect = 1
+[checkout]
+	defaultRemote = origin
+[pull]
+	rebase = false
+[push]
+	autoSetupRemote = true
+[rebase]
+	autosquash = true
+[credential "https://github.com"]
+	helper =
+	helper = !/usr/bin/env gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/usr/bin/env gh auth git-credential
+[url "https://github.com/"]
+	insteadOf = git@github.com:
+[url "https://"]
+	insteadOf = git://
+[url "git@codeberg.org:"]
+	pushInsteadOf = git://codeberg.org/
+	pushInsteadOf = https://codeberg.org/
+[include]
+	path = ~/.gitconfig.local

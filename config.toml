@@ -1,0 +1,180 @@
+[settings]
+experimental = true
+idiomatic_version_file_enable_tools = []
+
+[tools]
+# runtimes
+python = "3.14.2"
+ruby = "latest"
+node = "latest"
+go = "latest"
+rust = "latest"
+java = "latest"
+uv = "latest"
+# CLIs
+aws-cli = "latest"
+claude = "latest"
+cloc = "latest"
+cmake = "latest"
+colima = "latest"
+gh = "latest"
+jq = "latest"
+lazydocker = "latest"
+lima = "latest"
+mas = "latest"
+mkcert = "latest"
+pinact = "latest"
+pre-commit = "latest"
+protoc = "latest"
+ripgrep = "latest"
+shellcheck = "latest"
+shfmt = "latest"
+sops = "latest"
+yq = "latest"
+yt-dlp = "latest"
+"aqua:k1LoW/mo" = "latest"
+"aqua:sibprogrammer/xq" = "latest"
+"aqua:veeso/termscp" = "latest"
+"npm:difit" = "latest"
+"pipx:afxdl" = "latest"
+"pipx:claude-monitor" = "latest"
+"pipx:claude-statusbar" = "latest"
+"pipx:getjump" = "latest"
+"pipx:gppt" = "latest"
+"pipx:gw2aws" = "0.0.3"
+"pipx:migrate-to-uv" = "latest"
+"pipx:onelogin-aws-assume-role" = "latest"
+"pipx:poetry" = "latest"
+"pipx:saizeriya" = "latest"
+"pipx:wiredify" = "latest"
+
+# Casks installed by Homebrew count as installed; take over identical apps.
+[bootstrap.brew]
+adopt = true
+
+[bootstrap.packages]
+# formulae without a macOS build in the mise registry, libraries, and GNU tools
+"brew:binutils" = "latest"
+"brew:bison" = "latest"
+"brew:cairo" = "latest"
+"brew:coreutils" = "latest"
+"brew:diffutils" = "latest"
+"brew:docker" = "latest"
+"brew:docker-buildx" = "latest"
+"brew:docker-compose" = "latest"
+"brew:docker-credential-helper" = "latest"
+"brew:exiftool" = "latest"
+"brew:ffmpeg" = "latest"
+"brew:findutils" = "latest"
+"brew:gawk" = "latest"
+"brew:gcc" = "latest"
+"brew:giflib" = "latest"
+"brew:git" = "latest"
+"brew:gnu-sed" = "latest"
+"brew:gnu-tar" = "latest"
+"brew:gnupg" = "latest"
+"brew:graphviz" = "latest"
+"brew:grep" = "latest"
+"brew:imagemagick" = "latest"
+"brew:libpng" = "latest"
+"brew:mpv" = "latest"
+"brew:mysql-client" = "latest"
+"brew:nano" = "latest"
+"brew:nkf" = "latest"
+"brew:nss" = "latest"
+"brew:openapi-diff" = "latest"
+"brew:openssl@3" = "latest"
+"brew:pinentry-mac" = "latest"
+"brew:pkgconf" = "latest"
+"brew:roswell" = "latest"
+"brew:rsync" = "latest"
+"brew:sdl2-compat" = "latest"
+"brew:sdl2_mixer" = "latest"
+"brew:sentencepiece" = "latest"
+"brew:timidity" = "latest"
+"brew:tree" = "latest"
+"brew:ttyd" = "latest"
+"brew:unar" = "latest"
+"brew:uniutils" = "latest"
+"brew:unzip" = "latest"
+"brew:wget" = "latest"
+"brew:whois" = "latest"
+"brew:winetricks" = "latest"
+"brew:zstd" = "latest"
+# apps and fonts
+"brew-cask:1password" = "latest"
+"brew-cask:1password-cli" = "latest"
+"brew-cask:android-commandlinetools" = "latest"
+"brew-cask:android-studio" = "latest"
+"brew-cask:aws-vpn-client" = "latest"
+"brew-cask:font-hackgen-nerd" = "latest"
+"brew-cask:ghostty" = "latest"
+"brew-cask:google-chrome" = "latest"
+"brew-cask:notion" = "latest"
+"brew-cask:openai/tools/openai" = "latest"
+"brew-cask:pgadmin4" = "latest"
+"brew-cask:raspberry-pi-imager" = "latest"
+"brew-cask:rectangle" = "latest"
+"brew-cask:session-manager-plugin" = "latest"
+"brew-cask:slack" = "latest"
+"brew-cask:visual-studio-code" = "latest"
+"brew-cask:vlc" = "latest"
+# Mac App Store (needs `mas` from [tools]: the first run on a new Mac skips these)
+"mas:682658836" = "latest"  # GarageBand
+"mas:408981434" = "latest"  # iMovie
+"mas:409183694" = "latest"  # Keynote
+"mas:409203825" = "latest"  # Numbers
+"mas:490179405" = "latest"  # Okta Verify
+"mas:409201541" = "latest"  # Pages
+"mas:6757801838" = "latest" # RunCatNeo
+"mas:1475387142" = "latest" # Tailscale
+"mas:497799835" = "latest"  # Xcode
+
+[bootstrap.repos]
+"~/.local/share/zsh/plugins/pure" = { url = "https://github.com/sindresorhus/pure" }
+"~/.local/share/zsh/plugins/zsh-autosuggestions" = { url = "https://github.com/zsh-users/zsh-autosuggestions" }
+"~/.local/share/zsh/plugins/zsh-completions" = { url = "https://github.com/zsh-users/zsh-completions" }
+"~/.local/share/zsh/plugins/fast-syntax-highlighting" = { url = "https://github.com/zdharma-continuum/fast-syntax-highlighting" }
+"~/.local/share/zsh/plugins/history-search-multi-word" = { url = "https://github.com/zdharma-continuum/history-search-multi-word" }
+"~/.local/share/nano-highlight" = { url = "https://github.com/serialhex/nano-highlight" }
+
+[dotfiles]
+"~/.zshenv" = { source = "dotfiles/zshenv" }
+"~/.zshrc" = { source = "dotfiles/zshrc" }
+"~/.gitconfig" = { source = "dotfiles/gitconfig" }
+"~/.nanorc" = { source = "dotfiles/nanorc" }
+"~/.gnupg/gpg-agent.conf" = { source = "dotfiles/gnupg/gpg-agent.conf", mode = "copy", permissions = "0600" }
+"~/.config/ghostty/config" = { source = "dotfiles/ghostty/config" }
+
+[bootstrap.mise_shell_activate]
+zprofile = "shims"
+bash = true
+
+[bootstrap.user]
+login_shell = "/bin/zsh"
+
+# Replaces `brew services start colima`. colima/lima come from [tools]; the
+# docker CLI (needed for the `colima` context) comes from the Homebrew prefix.
+[bootstrap.services.colima]
+scope = "user"
+description = "Colima container runtime"
+command = "~/.local/bin/mise exec -- colima start --foreground --cpu 8 --memory 16 --disk 160 --vm-type vz --mount-type virtiofs --vz-rosetta"
+working_directory = "~"
+environment = { PATH = "/opt/homebrew/bin:/opt/homebrew/sbin:/usr/bin:/bin:/usr/sbin:/sbin" }
+restart = "on-failure"
+requires_tools = true
+
+[bootstrap.hooks]
+# Stop the Homebrew-managed colima LaunchAgent before mise's own one starts.
+post-tools = "bash {{ xdg_config_home }}/mise/scripts/stop-brew-colima.sh"
+
+[tasks.bootstrap]
+description = "Run imperative setup steps after the declarative bootstrap"
+run = [
+  { task = "setup:macos" },
+  { task = "setup:gpg" },
+  { task = "setup:git" },
+  { task = "setup:docker" },
+  { task = "setup:vscode" },
+  { task = "setup:claude" },
+]

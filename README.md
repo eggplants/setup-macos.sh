@@ -1,19 +1,20 @@
 # My macOS Setup
 
+## Run
+
 ```zsh
-xcode-select --install
-
-git clone https://github.com/eggplants/setup-macos.sh
-cd setup-macos.sh
-
-cp ./.Brewfile ~/.Brewfile
-cp /path/to/.my.gpg.sec.key ~/.sec.key 
-
-./setup-macos.sh
+# Place your GPG secret key at ~/.sec.key, then:
+curl -fsSL https://raw.githubusercontent.com/eggplants/setup-macos.sh/master/bootstrap.sh | bash
 ```
 
+## Update
 
-![Screenshot 2024-12-26 at 19 54 47](https://github.com/user-attachments/assets/a9fb5751-288b-491d-b289-299702346f9a)
+```zsh
+mise bootstrap --dry-run
+mise bootstrap
+mise bootstrap --update
+mise bootstrap status
+```
 
 ## Family
 

@@ -1,0 +1,43 @@
+# Theme
+theme = Andromeda
+
+# Font
+font-family = Guguru Sans Code Console
+font-feature = -dlig
+font-size = 10
+
+font-style-bold = false
+font-style-italic = false
+font-style-bold-italic = false
+
+font-thicken = true
+font-thicken-strength = 1
+
+alpha-blending = linear
+
+adjust-cell-width = 1
+adjust-cell-height = 2
+
+# macOS
+macos-titlebar-style = hidden
+macos-window-shadow = false
+
+# Window
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
+
+# Shell
+shell-integration-features = no-cursor
+shell-integration-features = sudo,ssh-terminfo,ssh-env
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+cursor-invert-fg-bg = true
+cursor-opacity = 0.8
+
+# Other
+mouse-hide-while-typing = true
+resize-overlay = never
+split-divider-color = red

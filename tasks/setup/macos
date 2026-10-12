@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#MISE description="macOS system setup: Rosetta, Xcode license, Gatekeeper"
+#MISE raw=true
+set -euo pipefail
+
+if [[ "$(uname -m)" == arm64 ]] && ! pkgutil --pkg-info com.apple.pkg.RosettaUpdateAuto &>/dev/null; then
+  sudo softwareupdate --install-rosetta --agree-to-license
+fi
+
+# Xcode comes from mas:497799835; accept its license once it is installed.
+if [[ -d /Applications/Xcode.app ]] && ! xcodebuild -license check &>/dev/null; then
+  sudo xcodebuild -license accept
+fi
+
+# Settings > Privacy & Security > Allow applications from "Anywhere"
+if ! spctl --status 2>/dev/null | grep -q disabled; then
+  sudo spctl --master-disable || :
+fi

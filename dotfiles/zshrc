@@ -1,0 +1,64 @@
+# ~/.zshrc — managed by mise dotfiles (~/.config/mise/dotfiles/zshrc)
+
+# PATH (re-prepend after path_helper in /etc/zprofile)
+typeset -U path PATH
+path=("$HOME/.local/bin" /opt/homebrew/bin /opt/homebrew/sbin $path)
+path+=("$HOME/.lmstudio/bin")
+export PERLLIB="/Library/Developer/CommandLineTools/usr/share/git-core/perl:$PERLLIB"
+
+# history
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=100000
+SAVEHIST=100000
+setopt appendhistory extendedhistory histignoredups incappendhistory sharehistory
+
+# options
+setopt correct autocd nolistbeep aliasfuncdef
+setopt extendedglob interactivecomments prompt_subst
+unsetopt nomatch
+
+# colors
+export LSCOLORS=gxfxcxdxbxegedabagacag
+export LS_COLORS='di=36;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;46'
+
+# plugins (cloned by [bootstrap.repos])
+_zplug="$HOME/.local/share/zsh/plugins"
+fpath=("$_zplug/zsh-completions/src" /opt/homebrew/share/zsh/site-functions $fpath)
+
+# completion
+autoload -U compinit && compinit -u
+zstyle ':completion:*' menu select
+zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
+
+# aliases
+alias ll='ls -lGF --color=auto'
+alias ls='ls -GF --color=auto'
+alias mb='mise bootstrap'
+alias cs='claude-statusbar'
+alias cstatus='claude-statusbar'
+alias mclaude='CLAUDE_CONFIG_DIR=~/.mclaude claude'
+
+# mise
+command -v mise >/dev/null && eval "$(mise activate zsh)"
+
+# GPG SSH agent
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null
+
+if [[ -d "$_zplug/pure" ]]; then
+  fpath+=("$_zplug/pure")
+  autoload -U promptinit && promptinit && prompt pure
+fi
+for _p in zsh-autosuggestions/zsh-autosuggestions.zsh \
+  fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh \
+  history-search-multi-word/history-search-multi-word.plugin.zsh; do
+  [[ -r "$_zplug/$_p" ]] && source "$_zplug/$_p"
+done
+unset _zplug _p
+
+bindkey '^[[A' up-line-or-search
+bindkey '^[[B' down-line-or-search

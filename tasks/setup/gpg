@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+#MISE description="Import the GPG secret key from ~/.sec.key"
+#MISE raw=true
+set -euo pipefail
+
+install -d -m 700 ~/.gnupg
+
+if gpg --list-secret-keys 2>/dev/null | grep -qE '^ *EE3A'; then
+  exit 0
+fi
+if [[ ! -f ~/.sec.key ]]; then
+  echo "setup:gpg: skipped (place your GPG secret key at ~/.sec.key and re-run)" >&2
+  exit 0
+fi
+
+GPG_TTY="$(tty)"
+export GPG_TTY
+gpgconf --kill gpg-agent
+gpg --import ~/.sec.key
+
+gpg --list-keys --with-keygrip | grep -FA1 '[SA]' |
+  awk -F 'Keygrip = ' '$0=$2' > ~/.gnupg/sshcontrol
+chmod 600 ~/.gnupg/sshcontrol
+gpg-connect-agent updatestartuptty /bye >/dev/null
+
+rm ~/.sec.key
